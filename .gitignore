@@ -1,0 +1,6 @@
+.git/
+doc/
+github.txt
+# Transifex
+/.tx/
+
