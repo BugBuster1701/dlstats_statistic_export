@@ -23,7 +23,7 @@
 		"php":">=5.3",
 		"contao/core":">=3,<4",
 		"contao-community-alliance/composer-plugin": "*",
-		"bugbuster/dlstats":">=3.8.0,<4",
+		"bugbuster/dlstats":">=3.8.RC1,<4",
 		"phpoffice/phpexcel":">=1.7.9,<2"
 	},
 	"autoload":{
