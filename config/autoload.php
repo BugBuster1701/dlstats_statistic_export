@@ -26,5 +26,6 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Classes
-	'BugBuster\DLStats\Stat\Export\DLStatsStatPanel' => 'system/modules/dlstats_statistic_export/classes/DLStatsStatPanel.php',
+	'BugBuster\DLStats\Stat\Export\DLStatsStatPanel'  => 'system/modules/dlstats_statistic_export/classes/DLStatsStatPanel.php',
+	'BugBuster\DLStats\Stat\Export\DLStatsStatExport' => 'system/modules/dlstats_statistic_export/classes/DLStatsStatExport.php',
 ));

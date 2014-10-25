@@ -18,7 +18,7 @@
 namespace BugBuster\DLStats\Stat\Export; 
 
 /**
- * Class BannerStatPanel
+ * Class DLStatsStatPanel
  *
  * @copyright	Glen Langer 2014 <http://www.contao.glen-langer.de>
  * @author      Glen Langer (BugBuster)
@@ -82,6 +82,7 @@ class DLStatsStatPanel extends \System
     </div>
 ';
         
+        $objYear = \Database::getInstance()->query("SELECT distinct(FROM_UNIXTIME(`tstamp`,'%Y')) AS Year FROM `tl_dlstatdets` WHERE 1 ORDER BY Year DESC");
         $year = '
     <div class="tl_limit tl_subpanel">
         <strong>Jahr:</strong> 
@@ -90,9 +91,12 @@ class DLStatsStatPanel extends \System
         </div>
         <select class="tl_select" name="dlstats_export_year" style="opacity: 0;">
           <option value="all">Alle Jahre</option>
-          <option value="2014">2014</option>
-          <option value="2013">2013</option>
-          <option value="2012">2012</option>
+';
+        while ($objYear->next())
+        {
+        	$year .= '<option value="'.$objYear->Year.'">'.$objYear->Year.'</option>';
+        }
+        $year .='
         </select> 
     </div>
 ';
@@ -104,13 +108,41 @@ class DLStatsStatPanel extends \System
         </div>
         <select class="tl_select" name="dlstats_export_month" style="opacity: 0;">
           <option value="all">Alle Monate</option>
-          <option value="12">12</option>
-          <option value="11">11</option>
-          <option value="10">10</option>
+';
+        for ($i = 1; $i < 13; $i++) 
+        {
+        	$month .= '<option value="'.$i.'">'.$i.'</option>';
+        }
+
+        $month .= '
         </select> 
     </div>
 ';
-        
+        $format = '
+    <div class="tl_limit tl_subpanel">
+        <strong>Format:</strong> 
+        <div class="styled_select tl_select">
+          <span>Excel xlsx</span>
+        </div>
+        <select class="tl_select" name="dlstats_export_format" style="opacity: 0;">
+          <option value="xlsx">Excel .xlsx</option>
+          <option value="ods" >Libre/OpenOffice .ods</option>
+          <option value="csv" >CSV</option>
+        </select> 
+    </div>
+';
+//for nightly TODO
+        $format = '
+    <div class="tl_limit tl_subpanel">
+        <strong>Format:</strong>
+        <div class="styled_select tl_select">
+          <span>CSV</span>
+        </div>
+        <select class="tl_select" name="dlstats_export_format" style="opacity: 0;">
+          <option value="csv" >CSV</option>
+        </select>
+    </div>
+';        
         $submit = '
     <div class="tl_subpanel">
         <input type="submit" value="Export" class="tl_submit" id="save" name="dlstats_export_submit">
@@ -123,12 +155,13 @@ class DLStatsStatPanel extends \System
 </div>';
         
         
-        return $pre.$text.$submit.$month.$year.$suf;
+        return $pre.$text.$submit.$format.$month.$year.$suf;
     } // getPanelLine
     
     
     protected function generateExport()
     {
-        return ;
+        $export = new \DLStats\Stat\Export\DLStatsStatExport;
+        return $export->run();
     }
 } // class
