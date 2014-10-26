@@ -38,11 +38,11 @@ class DLStatsStatPanel extends \System
     public function __construct()
     {
         parent::__construct();
-        \System::loadLanguageFile('tl_dlstats_stat_export'); //TODO
+        \System::loadLanguageFile('tl_dlstats_stat_export'); 
         
         if (\Input::post('act',true)=='export') //action DLStats Export
         {
-            $this->generateExport(); //TODO
+            $this->generateExport(); 
         }
     }
     
@@ -68,7 +68,6 @@ class DLStatsStatPanel extends \System
      */
     public function getPanelLine()
     {
-        //TODO textvariablen
         $pre = '
 <div class="tl_panel">
 <form enctype="application/x-www-form-urlencoded" method="post" class="tl_form" id="tl_article" action="contao/main.php?do=dlstats">
@@ -78,19 +77,19 @@ class DLStatsStatPanel extends \System
 
         $text = '
     <div class="tl_limit" style="float:left; padding-left: 22px;">
-            <strong>Statistik Export:</strong> 
+            <strong>'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['statistics_export'].':</strong> 
     </div>
 ';
         
         $objYear = \Database::getInstance()->query("SELECT distinct(FROM_UNIXTIME(`tstamp`,'%Y')) AS Year FROM `tl_dlstatdets` WHERE 1 ORDER BY Year DESC");
         $year = '
     <div class="tl_limit tl_subpanel">
-        <strong>Jahr:</strong> 
+        <strong>'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['year'].':</strong> 
         <div class="styled_select tl_select">
-          <span>Alle Jahre</span>
+          <span>'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['all_years'].'</span>
         </div>
         <select class="tl_select" name="dlstats_export_year" style="opacity: 0;">
-          <option value="all">Alle Jahre</option>
+          <option value="all">'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['all_years'].'</option>
 ';
         while ($objYear->next())
         {
@@ -102,12 +101,12 @@ class DLStatsStatPanel extends \System
 ';
         $month = '
     <div class="tl_limit tl_subpanel">
-        <strong>Monat:</strong> 
+        <strong>'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['month'].':</strong> 
         <div class="styled_select tl_select">
-          <span>Alle Monate</span>
+          <span>'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['all_months'].'</span>
         </div>
         <select class="tl_select" name="dlstats_export_month" style="opacity: 0;">
-          <option value="all">Alle Monate</option>
+          <option value="all">'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['all_months'].'</option>
 ';
         for ($i = 1; $i < 13; $i++) 
         {
@@ -120,32 +119,35 @@ class DLStatsStatPanel extends \System
 ';
         $format = '
     <div class="tl_limit tl_subpanel">
-        <strong>Format:</strong> 
+        <strong>'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['format'].':</strong> 
         <div class="styled_select tl_select">
-          <span>Excel xlsx</span>
+          <span>'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['excel'].'</span>
         </div>
         <select class="tl_select" name="dlstats_export_format" style="opacity: 0;">
-          <option value="xlsx">Excel .xlsx</option>
-          <option value="ods" >Libre/OpenOffice .ods</option>
-          <option value="csv" >CSV</option>
+          <option value="xlsx">'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['excel'].'</option>
+          <option value="csv" >'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['csv'].'</option>
         </select> 
     </div>
 ';
-//for nightly TODO
-        $format = '
+        //XLSX needs the library php_zip
+        if (!class_exists('ZipArchive', FALSE))
+        {
+            $format = '
     <div class="tl_limit tl_subpanel">
-        <strong>Format:</strong>
+        <strong>'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['format'].':</strong> 
         <div class="styled_select tl_select">
-          <span>CSV</span>
+          <span>'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['csv'].'</span>
         </div>
         <select class="tl_select" name="dlstats_export_format" style="opacity: 0;">
-          <option value="csv" >CSV</option>
-        </select>
+          <option value="csv" >'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['csv'].'</option>
+        </select> 
     </div>
-';        
+';            
+        }
+     
         $submit = '
     <div class="tl_subpanel">
-        <input type="submit" value="Export" class="tl_submit" id="save" name="dlstats_export_submit">
+        <input type="submit" value="'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['export'].'" class="tl_submit" id="save" name="dlstats_export_submit">
     </div>
 ';
         
