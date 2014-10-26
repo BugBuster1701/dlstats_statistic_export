@@ -69,6 +69,23 @@ class DLStatsStatPanel extends \System
     public function getPanelLine()
     {
         $pre = '
+<style type="text/css">
+/* <![CDATA[ */
+.unix.chrome input.tl_submit {
+    padding: 2px 12px 2px 13px;
+}
+.win.chrome input.tl_submit {
+    padding: 3px 12px 3px 13px;
+}
+.opera input.tl_submit {
+    padding: 2px 12px 2px 13px;
+}
+.win.ie input.tl_submit {
+    padding: 3px 12px 3px 13px;
+}
+            
+/* ]]> */
+</style>
 <div class="tl_panel">
 <form enctype="application/x-www-form-urlencoded" method="post" class="tl_form" id="tl_article" action="contao/main.php?do=dlstats">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
@@ -76,7 +93,7 @@ class DLStatsStatPanel extends \System
 ';
 
         $text = '
-    <div class="tl_limit" style="float:left; padding-left: 22px;">
+    <div class="tl_limit" style="float:left; padding-left: 22px; line-height: 21px;">
             <strong>'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['statistics_export'].':</strong> 
     </div>
 ';
@@ -146,7 +163,7 @@ class DLStatsStatPanel extends \System
         }
      
         $submit = '
-    <div class="tl_subpanel">
+    <div class="tl_subpanel" style="padding-right: 14px;">
         <input type="submit" value="'.$GLOBALS['TL_LANG']['tl_dlstats_stat_export']['export'].'" class="tl_submit" id="save" name="dlstats_export_submit">
     </div>
 ';
