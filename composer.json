@@ -1,48 +1,5 @@
 {
-	"name":"bugbuster/dlstats_statistic_export",
-	"description":"Contao Module dlstats Add-on: Statistic Export",
-	"keywords":["contao","downloads","counter","export"],
-	"type":"contao-module",
-	"homepage":"http://www.contao.glen-langer.de",
-	"license":"LGPL-3.0+",
-	"authors":[
-		{
-			"name":"Glen Langer",
-			"homepage":"http://www.contao.glen-langer.de",
-			"role":"Developer"
-		}
-	],
-	"support":{
-		"issues":"https://github.com/BugBuster1701/dlstats_statistic_export/issues",
-		"irc":"irc://irc.freenode.org/contao.dev",
-		"source":"https://github.com/BugBuster1701/dlstats_statistic_export",
-		"wiki":"http://de.contaowiki.org/Dlstats",
-		"forum":"https://community.contao.org/de/forumdisplay.php?119-Sonstige-Erweiterungen"
-	},
-	"require":{
-		"php":">=5.3",
-		"contao/core":">=3.2,<4",
-		"contao-community-alliance/composer-plugin": "*",
-		"bugbuster/dlstats":">=3.8.RC1,<4",
-		"phpoffice/phpexcel":">=1.7.9,<2"
-	},
-	"autoload":{
-		"classmap":[""]
-	},
-	"replace":{
-		"contao-legacy/dlstats_statistic_export":"self.version"
-	},
-	"extra":{
-		"contao":{
-			"sources":{
-				"":"system/modules/dlstats_statistic_export"
-			},
-			"transifex": {
-				"project": "contao-dlstats_statistic_export",
-				"prefix": "master-",
-				"languages_cto": "languages",
-				"languages_tx": ".tx"
-			}
-		}
-	}
+    "require": {
+        "phpoffice/phpexcel": "~1.8"
+    }
 }
