@@ -52,7 +52,10 @@ class DLStatsStatExport extends \System
         /**
          * Include the Composer autoloader, only for ER2 version
          */
-        require_once __DIR__ . '/../vendor/autoload.php';
+        if ( !class_exists('PHPExcel') ) 
+        {
+        	require_once __DIR__ . '/../vendor/autoload.php';
+        }        
     }
     
     public function run()
@@ -265,14 +268,3 @@ class DLStatsStatExport extends \System
         }
     }
 }
-
-/**
- 	// Check if zip class exists
-// if (!class_exists($zipClass, FALSE)) {
-// throw new PHPExcel_Reader_Exception($zipClass . " library is not enabled");
-// }
- This allows the writing of Excel2007 files, even without ZipArchive enabled (it does require zlib), or when php_zip is one of the buggy PHP 5.2.6 or 5.2.8 versions
-It can be enabled using PHPExcel_Settings::setZipClass(PHPExcel_Settings::PCLZIP);
-
- *  
-*/
